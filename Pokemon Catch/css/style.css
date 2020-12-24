@@ -23,7 +23,8 @@ h1 {
     -webkit-text-stroke: 2px black;
 }
 
-.container {
+
+#game {
     border: 1px solid black;
     /* display: flex; */
     /* display: inline;
@@ -45,7 +46,3 @@ h1 {
     margin-bottom: 50px;
 }
 
-.startBox {
-    z-index: -1;
-    border: 1px solid black;
-}
