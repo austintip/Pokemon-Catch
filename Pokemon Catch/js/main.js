@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', (e => {
 //After click "start" the box disappears
 
 let game = document.getElementById('game');
+let startButton = document.getElementById('startButton');
 
 let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
@@ -27,13 +28,15 @@ function Sprite(x, y, width, height, color) {
 }
 
 let trainer = new Sprite (20, 380, 50, 50, 'red')
-let rocketGrunt = new Sprite (55, 205, 55, 55, 'gray')
+let rocketGrunt = new Sprite (15, 160, 55, 55, 'gray')
 let pokemon = new Sprite (60, 50, 200, 45, 'yellow')
 let movement = 15
 
 let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
     trainer.render()
+    rocketGrunt.render()
+    let gameInterval = setInterval(gameLoop, 100);
 }
 
 let detectHit = () => {
@@ -57,9 +60,11 @@ let movementHandler = (e) => {
     }
 }
 
+//game won't start until "Start" is clicked
+startButton.addEventListener('click', gameLoop);
 document.addEventListener('keydown', movementHandler)
 
-let gameInterval = setInterval(gameLoop, 100)
+
 
 
 
