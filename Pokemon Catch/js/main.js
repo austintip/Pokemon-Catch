@@ -29,13 +29,14 @@ function Sprite(x, y, width, height, color) {
 
 let trainer = new Sprite (20, 380, 50, 50, 'red')
 let rocketGrunt = new Sprite (15, 160, 55, 55, 'gray')
-let pokemon = new Sprite (60, 50, 200, 45, 'yellow')
+let pokemon = new Sprite (10, 40, 45, 45, 'yellow')
 let movement = 15
 
 let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
     trainer.render()
     rocketGrunt.render()
+    pokemon.render()
     let gameInterval = setInterval(gameLoop, 100);
 }
 
