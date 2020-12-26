@@ -79,19 +79,22 @@ let movementHandler = (e) => {
         trainer.x += movement
     } else if (e.key === "ArrowLeft") {
         trainer.x -= movement
-    } else if (e.key === "w") {
-            pokeball.render();
-            pokeball.y -= movement
     } else {
         console.log('Use right or left arrow keys to move!')
     }
 }
 //have trainer throw a ball with spacebar
 
-
+let pokeballThrow = (event) => {
+    if (event.code ==='Space') {
+        pokeball.y -= movement + 10
+    }
+}
 //game won't start until "Start" is clicked
 startButton.addEventListener('click', gameLoop);
-document.addEventListener('keydown', movementHandler)
+document.addEventListener('keydown', movementHandler);
+document.addEventListener('keydown', pokeballThrow);
+
 
 
 
