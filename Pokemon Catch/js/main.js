@@ -14,7 +14,7 @@ let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
 game.setAttribute('width', getComputedStyle(game)['width'])
 
-function Sprite(x, y, width, height, color) {
+function sprite(x, y, width, height, color) {
     this.x = x
     this.y = y
     this.color = color
@@ -27,16 +27,35 @@ function Sprite(x, y, width, height, color) {
     }
 }
 
-let trainer = new Sprite (20, 380, 50, 50, 'red')
-let rocketGrunt = new Sprite (15, 160, 55, 55, 'gray')
-let pokemon = new Sprite (10, 40, 45, 45, 'yellow')
+let trainer = new sprite (20, 380, 50, 50, 'red')
+let rocketGrunt = new sprite (15, 160, 55, 55, 'gray')
+let pokemon = new sprite (10, 40, 45, 45, 'yellow')
 let movement = 15
+
+//rocket animation
+function rocketMovement() {
+    if (rocketGrunt.x < 320) {
+        rocketGrunt.x += .01
+        // if (rocketGrunt.x = 100) {
+        //     break;
+        // }
+    }
+}
+
+function pokemonMovement() {
+    if (pokemon.x < 320) {
+        pokemon.x += .015
+    }
+}
 
 let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
     trainer.render()
     rocketGrunt.render()
+    // have team rocket grunt that moves left to right while game is played
     pokemon.render()
+    rocketMovement();
+    pokemonMovement();
     let gameInterval = setInterval(gameLoop, 100);
 }
 
@@ -51,6 +70,7 @@ let endGame = () => {
     console.log('hi')
 }
 
+//have a trainer (box for now) that moves with arrow keys
 let movementHandler = (e) => {
     if (e.key ==="ArrowRight") {
         trainer.x += movement
@@ -60,6 +80,8 @@ let movementHandler = (e) => {
         console.log('Use right or left arrow keys to move!')
     }
 }
+//have trainer throw a ball with spacebar
+
 
 //game won't start until "Start" is clicked
 startButton.addEventListener('click', gameLoop);
@@ -69,9 +91,6 @@ document.addEventListener('keydown', movementHandler)
 
 
 
-//have a trainer (box for now) that moves with arrow keys
-//have trainer throw a ball with spacebar
-// have team rocket grunt that moves left to right while game is played
 // have pokemon that spawns from off screen and moves across
 // have a feature that detects a catch
 //detect catch makes pokemon disappear into ball
