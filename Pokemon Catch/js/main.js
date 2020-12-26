@@ -27,9 +27,11 @@ function sprite(x, y, width, height, color) {
     }
 }
 
+
 let trainer = new sprite (20, 380, 50, 50, 'red')
 let rocketGrunt = new sprite (15, 160, 55, 55, 'gray')
 let pokemon = new sprite (10, 40, 45, 45, 'yellow')
+let pokeball = new sprite(trainer.x, trainer.y, 20, 20, 'white')
 let movement = 15
 
 //rocket animation
@@ -56,6 +58,7 @@ let gameLoop = () => {
     pokemon.render()
     rocketMovement();
     pokemonMovement();
+    pokeball.render();
     let gameInterval = setInterval(gameLoop, 100);
 }
 
@@ -76,6 +79,9 @@ let movementHandler = (e) => {
         trainer.x += movement
     } else if (e.key === "ArrowLeft") {
         trainer.x -= movement
+    } else if (e.key === "w") {
+            pokeball.render();
+            pokeball.y -= movement
     } else {
         console.log('Use right or left arrow keys to move!')
     }
