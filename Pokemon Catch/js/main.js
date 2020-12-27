@@ -84,15 +84,20 @@ let endGame = () => {
 let detectHit = () => {
     console.log('yo')
     if (
-        pokeball.x + pokemon.width >= rocketGrunt.x &&
+        pokeball.x + pokeball.width >= rocketGrunt.x &&
         pokeball.x <= rocketGrunt.x + rocketGrunt.width &&
         pokeball.y <= rocketGrunt.y + rocketGrunt.height &&
-        pokeball.y + pokeball.height >= rocketGrunt.y
-    ) {
-        endGame();
-    }
-    // TODO: write collision detection
-     //include endGame in here.
+        pokeball.y + pokeball.height >= rocketGrunt.y) {
+            endGame();
+        } else if(
+        pokeball.x + pokeball.width >= pokemon.x &&
+        pokeball.x <= pokemon.x + pokemon.width &&
+        pokeball.y <= pokemon.y +pokemon.height &&
+        pokeball.y + pokeball.height >= pokemon.y) {
+            pokemon.render();
+        }
+// TODO: write collision detection
+//nclude endGame in here.
     }
 
 
