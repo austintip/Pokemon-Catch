@@ -31,7 +31,7 @@ function sprite(x, y, width, height, color, speed)  {
 
 let trainer = new sprite (20, 380, 50, 50, 'red')
 let rocketGrunt = new sprite (15, 160, 55, 55, 'gray', 5)
-let pokemon = new sprite (10, 40, 45, 45, 'yellow')
+let pokemon = new sprite (10, 40, 45, 45, 'yellow', 7)
 let pokeball = new sprite(trainer.x, trainer.y, 20, 20, 'white')
 let movement = 5
 
@@ -50,9 +50,10 @@ function rocketMovement() {
 }
 
 function pokemonMovement() {
-    if (pokemon.x < 320) {
-        pokemon.x += 2
+    if (pokemon.x >= game.width) {
+        pokemon.x = 0-pokemon.width
     }
+    pokemon.x += pokemon.speed
 }
 
 let gameLoop = () => {
