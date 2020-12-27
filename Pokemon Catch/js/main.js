@@ -66,22 +66,35 @@ let gameLoop = () => {
     // if (pokeball.alive === true) {
     pokeball.render();
     // }
+    detectHit();
 }
 
 
 
 let gameInterval 
 
-let detectHit = () => {
-    console.log('yo')
-    // TODO: write collision detection
-    //include endGame in here.
-}
-
 let endGame = () => {
     // TODO: write endGame funct
     console.log('hi')
+    setTimeout(() => {
+        clearInterval(gameInterval)
+    }, 100)
 }
+
+let detectHit = () => {
+    console.log('yo')
+    if (
+        pokeball.x + pokemon.width >= rocketGrunt.x &&
+        pokeball.x <= rocketGrunt.x + rocketGrunt.width &&
+        pokeball.y <= rocketGrunt.y + rocketGrunt.height &&
+        pokeball.y + pokeball.height >= rocketGrunt.y
+    ) {
+        endGame();
+    }
+    // TODO: write collision detection
+     //include endGame in here.
+    }
+
 
 //have a trainer (box for now) that moves with arrow keys
 let movementHandler = (e) => {
