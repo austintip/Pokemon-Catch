@@ -14,14 +14,14 @@ let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
 game.setAttribute('width', getComputedStyle(game)['width'])
 
-function sprite(x, y, width, height, color, speed)  {
+function sprite(x, y, width, height, color, speed, alive)  {
     this.x = x
     this.y = y
     this.color = color
     this.width = width
     this.height = height
     this.speed = speed
-    this.alive = true
+    this.alive = alive
     this.render = function() {
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.width, this.height)
@@ -29,11 +29,10 @@ function sprite(x, y, width, height, color, speed)  {
 }
 
 
-let trainer = new sprite (20, 380, 50, 50, 'red')
-let rocketGrunt = new sprite (15, 160, 55, 55, 'gray', 5)
-let pokemon = new sprite (10, 40, 45, 45, 'yellow', 7)
-let pokeball = new sprite(trainer.x, trainer.y, 20, 20, 'white')
-let movement = 5
+let trainer = new sprite (20, 380, 50, 50, 'red', 10, true)
+let rocketGrunt = new sprite (15, 160, 55, 55, 'gray', 5, true)
+let pokemon = new sprite (10, 40, 45, 45, 'yellow', 7, true)
+let pokeball = new sprite(10, 375, 20, 20, 'white', 10, false)
 
 //rocket animation
 function rocketMovement() {
@@ -64,8 +63,12 @@ let gameLoop = () => {
     pokemon.render()
     rocketMovement();
     pokemonMovement();
+    // if (pokeball.alive === true) {
     pokeball.render();
+    // }
 }
+
+
 
 let gameInterval 
 
@@ -82,28 +85,29 @@ let endGame = () => {
 
 //have a trainer (box for now) that moves with arrow keys
 let movementHandler = (e) => {
+    console.log(e.key)
     if (e.key ==="ArrowRight") {
-        trainer.x += movement
+        trainer.x += trainer.speed
     } else if (e.key === "ArrowLeft") {
-        trainer.x -= movement
+        trainer.x -= trainer.speed
+    } else if (e.key ==='w') {
+            // pokeball.alive === true
+            pokeball.y -= pokeball.speed
+            pokeball.x = trainer.x
     } else {
         console.log('Use right or left arrow keys to move!')
     }
 }
 //have trainer throw a ball with spacebar
 
-let pokeballThrow = (event) => {
-    if (event.code ==='Space') {
-        pokeball.y -= movement + 10
-    }
-}
+
 //game won't start until "Start" is clicked
 startButton.addEventListener('click', (e) => {
     e.preventDefault()
     gameInterval = setInterval(gameLoop, 60);
 });
 document.addEventListener('keydown', movementHandler);
-document.addEventListener('keydown', pokeballThrow);
+// document.addEventListener('keydown', pokeballThrow);
 
 
 
