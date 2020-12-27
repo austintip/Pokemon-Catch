@@ -14,12 +14,13 @@ let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
 game.setAttribute('width', getComputedStyle(game)['width'])
 
-function sprite(x, y, width, height, color) {
+function sprite(x, y, width, height, color, speed)  {
     this.x = x
     this.y = y
     this.color = color
     this.width = width
     this.height = height
+    this.speed = speed
     this.alive = true
     this.render = function() {
         ctx.fillStyle = this.color
@@ -29,24 +30,28 @@ function sprite(x, y, width, height, color) {
 
 
 let trainer = new sprite (20, 380, 50, 50, 'red')
-let rocketGrunt = new sprite (15, 160, 55, 55, 'gray')
+let rocketGrunt = new sprite (15, 160, 55, 55, 'gray', 5)
 let pokemon = new sprite (10, 40, 45, 45, 'yellow')
 let pokeball = new sprite(trainer.x, trainer.y, 20, 20, 'white')
-let movement = 15
+let movement = 5
 
 //rocket animation
 function rocketMovement() {
-    if (rocketGrunt.x < 320) {
-        rocketGrunt.x += .01
+    if (rocketGrunt.x + rocketGrunt.width >= game.width) {
+        rocketGrunt.speed = -rocketGrunt.speed
         // if (rocketGrunt.x = 100) {
         //     break;
         // }
+    } 
+    if (rocketGrunt.x <= 0) {
+        rocketGrunt.speed = -rocketGrunt.speed
     }
+    rocketGrunt.x += rocketGrunt.speed
 }
 
 function pokemonMovement() {
     if (pokemon.x < 320) {
-        pokemon.x += .015
+        pokemon.x += 2
     }
 }
 
@@ -59,8 +64,9 @@ let gameLoop = () => {
     rocketMovement();
     pokemonMovement();
     pokeball.render();
-    let gameInterval = setInterval(gameLoop, 100);
 }
+
+let gameInterval 
 
 let detectHit = () => {
     console.log('yo')
@@ -91,7 +97,10 @@ let pokeballThrow = (event) => {
     }
 }
 //game won't start until "Start" is clicked
-startButton.addEventListener('click', gameLoop);
+startButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    gameInterval = setInterval(gameLoop, 60);
+});
 document.addEventListener('keydown', movementHandler);
 document.addEventListener('keydown', pokeballThrow);
 
