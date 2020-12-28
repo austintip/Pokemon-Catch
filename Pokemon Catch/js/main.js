@@ -32,9 +32,9 @@ function sprite(x, y, width, height, color, speed, alive)  {
 let trainer = new sprite (20, 380, 50, 50, 'red', 10, true)
 let rocketGrunt = new sprite (15, 160, 55, 55, 'gray', 5, true)
 let pokemon = new sprite (10, 40, 45, 45, 'yellow', 7, true)
-let pokeball = new sprite(10, 375, 20, 20, 'white', 10, false)
+let pokeball = new sprite(10, 375, 20, 20, 'white', 10, true)
 
-//rocket animation
+//moves rocket grunt
 function rocketMovement() {
     if (rocketGrunt.x + rocketGrunt.width >= game.width) {
         rocketGrunt.speed = -rocketGrunt.speed
@@ -48,6 +48,7 @@ function rocketMovement() {
     rocketGrunt.x += rocketGrunt.speed
 }
 
+// moves pokemon
 function pokemonMovement() {
     if (pokemon.x >= game.width) {
         pokemon.x = 0-pokemon.width
@@ -59,14 +60,16 @@ let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
     trainer.render()
     rocketGrunt.render()
-    // have team rocket grunt that moves left to right while game is played
-    pokemon.render()
     rocketMovement();
     pokemonMovement();
-    // if (pokeball.alive === true) {
-    pokeball.render();
-    // }
+    pokeball.render(); 
     detectHit();
+    if (pokemon.alive == true){
+    pokemon.render();
+    }
+    if (pokeball.alive == false) {
+        throwPokeball();
+    }
 }
 
 
@@ -74,8 +77,6 @@ let gameLoop = () => {
 let gameInterval 
 
 let endGame = () => {
-    // TODO: write endGame funct
-    console.log('hi')
     setTimeout(() => {
         clearInterval(gameInterval)
     }, 100)
@@ -94,29 +95,44 @@ let detectHit = () => {
         pokeball.x <= pokemon.x + pokemon.width &&
         pokeball.y <= pokemon.y +pokemon.height &&
         pokeball.y + pokeball.height >= pokemon.y) {
-            pokemon.render();
+            pokemon.alive = false;
+            pokeball.y = trainer.y
+            pokeball.alive = true;
+            //function that makes pokemon disappear and respawn
         }
-// TODO: write collision detection
-//nclude endGame in here.
+    pokemon.alive = true;
     }
 
 
-//have a trainer (box for now) that moves with arrow keys
+
+const throwPokeball = () => {
+    if (pokeball.y < 0) {
+        pokeball.alive = true
+        pokeball.y = trainer.y
+    }
+    pokeball.y -= pokeball.speed
+}
+
+//moves trainer
 let movementHandler = (e) => {
     console.log(e.key)
     if (e.key ==="ArrowRight") {
         trainer.x += trainer.speed
+        if (pokeball.alive) {
+            pokeball.x = trainer.x
+        }
     } else if (e.key === "ArrowLeft") {
         trainer.x -= trainer.speed
-    } else if (e.key ==='w') {
-            // pokeball.alive === true
-            pokeball.y -= pokeball.speed
+        if (pokeball.alive) {
             pokeball.x = trainer.x
+        }
+    } else if (e.key ==='w') {
+            pokeball.x = trainer.x
+            pokeball.alive = false
     } else {
         console.log('Use right or left arrow keys to move!')
     }
 }
-//have trainer throw a ball with spacebar
 
 
 //game won't start until "Start" is clicked
@@ -125,16 +141,6 @@ startButton.addEventListener('click', (e) => {
     gameInterval = setInterval(gameLoop, 60);
 });
 document.addEventListener('keydown', movementHandler);
-// document.addEventListener('keydown', pokeballThrow);
 
 
-
-
-
-
-// have pokemon that spawns from off screen and moves across
-// have a feature that detects a catch
-//detect catch makes pokemon disappear into ball
-// have a feature that detects a collision with rocket
-//end game on rocket collision
 // display "game over" in new window with "Play again" btn
