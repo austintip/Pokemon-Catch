@@ -100,7 +100,7 @@ let detectHit = () => {
             pokeball.alive = true;
             //function that makes pokemon disappear and respawn
         }
-    pokemon.alive = true;
+    // pokemon.alive = true;
     }
 
 
