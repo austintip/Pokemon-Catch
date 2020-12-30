@@ -27,7 +27,7 @@ Pokémon will spawn and move across the top of the screen in the tall grass befo
 - [ ]  Have a box for the trainer that moves left to right with arrowkey inputs on the bottom of the game screen
 - [ ] Have a box for the rocket grunt that moves back and forth in the middle of the game screen
 - [ ] have a box that spawns and crosses left to right at the top of the game screen
-- [ ] have a feature that allows a ball(another box) to be thrown with the spacebar
+- [ ] have a feature that allows a ball(another box) to be thrown with the W key
 - [ ] have a detect hit function that ends the game if it hits the rocket grunt and makes the pokemon disappear if it hits the pokémon
 
 ## Stretch Goals
