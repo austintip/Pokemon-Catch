@@ -10,7 +10,7 @@ let game = document.getElementById('game');
 let startButton = document.getElementById('startButton');
 let gameOverBox = document.getElementById('gameOver');
 let youWinBox = document.getElementById('youWin');
-let replayBtn = document.getElementById('replayButton');
+let replayBtn = document.querySelectorAll('.replayButton');
 
 let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
@@ -34,7 +34,7 @@ function sprite(x, y, width, height, color, speed, alive)  {
 let trainer = new sprite (20, 380, 50, 50, 'red', 10, true)
 let rocketGrunt = new sprite (15, 160, 55, 55, 'gray', 5, true)
 let pokemon = new sprite (10, 40, 45, 45, 'yellow', 7, true)
-let pokeball = new sprite(10, 375, 20, 20, 'white', 10, true)
+let pokeball = new sprite(20, 375, 20, 20, 'white', 10, true)
 
 //moves rocket grunt
 function rocketMovement() {
@@ -150,12 +150,16 @@ startButton.addEventListener('click', (e) => {
     gameInterval = setInterval(gameLoop, 60);
 });
 
-// function reload() {
-//     location.reload();
-// }
+function reload() {
+    window.location.reload();
+}
 // make event listener for play again btn and keep catching btn
+replayBtn.forEach(button => {
+    button.addEventListener('click', reload);
+});
 
 
+// replayBtn.addEventListener('click', reload);
 document.addEventListener('keydown', movementHandler);
 
 

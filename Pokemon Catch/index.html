@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Catch!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/main.js" defer></script>
 </head>
@@ -12,21 +13,22 @@
         <h1>Pokémon Catch!</h1>
     </div>
     <div class="startBox">
-        Welcome to the world of Pokémon! Play as famed trainer, Red, as you try to catch 'em all! Use the left and right arrow keys to move the trainer and press the W key to throw the pokéball! Watch out, if you hit the evil Team Rocket Grunt, it's Game Over! 
+        Welcome to the world of Pokémon! Play as famed trainer, Red, as you try to catch 'em all! Use the left and right arrow keys to move the trainer and press the W key to throw the pokéball! Watch out, if you hit the evil Team Rocket Grunt, it's Game Over!<br> Click "Start" to start catching!
+        <br>
         <button type=button id="startButton">Start!</button>
     </div>
     <div id="gameOver">
         <div id="modal-content">
             Team Rocket Stole Your Pokeball!
             <br>
-            <button type=button id=replayButton>Play Again!</button>
+            <button type=button class="replayButton">Play Again!</button>
         </div>
     </div>
     <div id="youWin">
         <div id="modal-content-two">
             You caught the Pokémon!
             <br>
-            <button type=button id=replayButton>Keep Catching!</button>
+            <button type=button class="replayButton">Keep Catching!</button>
         </div>
     </div>
     <canvas id="game" width="375" height="320">
