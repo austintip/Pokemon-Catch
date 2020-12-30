@@ -29,6 +29,55 @@ h1 {
     justify-content: center;
 }
 
+#gameOver {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: lightblue;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal-content {
+    background-color: greenyellow;
+    text-align: center;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 40%;
+}
+
+#youWin {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: lightblue;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal-content-two {
+    text-align: center;
+    background-color: greenyellow;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 40%;
+}
+
+#replayButton {
+    color: yellow;
+    -webkit-text-stroke: 2px black;
+}
+
 #game {
     border: 1px solid black;
     /* display: flex; */

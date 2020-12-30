@@ -3,12 +3,14 @@ document.addEventListener('DOMContentLoaded', (e => {
     console.log("hello!")
 }));
 
-// Have a box that displays instructions
-//Have a button in the box that says start
-//After click "start" the box disappears
 
 let game = document.getElementById('game');
+// Have a box that displays instructions
+//Have a button in the box that says start
 let startButton = document.getElementById('startButton');
+let gameOverBox = document.getElementById('gameOver');
+let youWinBox = document.getElementById('youWin');
+let replayBtn = document.getElementById('replayButton');
 
 let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
@@ -38,9 +40,6 @@ let pokeball = new sprite(10, 375, 20, 20, 'white', 10, true)
 function rocketMovement() {
     if (rocketGrunt.x + rocketGrunt.width >= game.width) {
         rocketGrunt.speed = -rocketGrunt.speed
-        // if (rocketGrunt.x = 100) {
-        //     break;
-        // }
     } 
     if (rocketGrunt.x <= 0) {
         rocketGrunt.speed = -rocketGrunt.speed
@@ -80,6 +79,16 @@ let endGame = () => {
     setTimeout(() => {
         clearInterval(gameInterval)
     }, 100)
+    gameOverBox.style.display = "block";
+    // include a box that pops up saying game over, Play Again?
+}
+
+let endGameWin = () => {
+    setTimeout(() => {
+        clearInterval(gameInterval)
+    }, 100)
+    youWinBox.style.display = "block";
+    //include a box saying "You caught a pokemon! <btn>Keep catching</btn>"
 }
 
 let detectHit = () => {
@@ -98,9 +107,9 @@ let detectHit = () => {
             pokemon.alive = false;
             pokeball.y = trainer.y
             pokeball.alive = true;
-            //function that makes pokemon disappear and respawn
+            endGameWin();
+            //TODO function that makes pokemon disappear and respawn
         }
-    // pokemon.alive = true;
     }
 
 
@@ -140,7 +149,15 @@ startButton.addEventListener('click', (e) => {
     e.preventDefault()
     gameInterval = setInterval(gameLoop, 60);
 });
+
+// function reload() {
+//     location.reload();
+// }
+// make event listener for play again btn and keep catching btn
+
+
 document.addEventListener('keydown', movementHandler);
+
 
 
 // display "game over" in new window with "Play again" btn
