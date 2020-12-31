@@ -16,6 +16,7 @@ let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
 game.setAttribute('width', getComputedStyle(game)['width'])
 
+//create the sprites
 function sprite(x, y, width, height, color, speed, alive, type)  {
     this.type = type;
     if (type == "image") {
@@ -66,6 +67,7 @@ function pokemonMovement() {
     pokemon.x += pokemon.speed
 }
 
+//the game!!
 let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
     trainer.render()
@@ -86,12 +88,12 @@ let gameLoop = () => {
 
 let gameInterval 
 
+//what happens when you hit either a pokemon or a rocket grunt
 let endGame = () => {
     setTimeout(() => {
         clearInterval(gameInterval)
     }, 100)
     gameOverBox.style.display = "block";
-    // include a box that pops up saying game over, Play Again?
 }
 
 let endGameWin = () => {
@@ -99,9 +101,9 @@ let endGameWin = () => {
         clearInterval(gameInterval)
     }, 100)
     youWinBox.style.display = "block";
-    //include a box saying "You caught a pokemon! <btn>Keep catching</btn>"
 }
 
+//functions that detect hits of the pokeball
 let detectHit = () => {
     console.log('yo')
     if (
@@ -124,7 +126,7 @@ let detectHit = () => {
     }
 
 
-
+// throws the ball
 const throwPokeball = () => {
     if (pokeball.y < 0) {
         pokeball.alive = true
@@ -161,18 +163,15 @@ startButton.addEventListener('click', (e) => {
     gameInterval = setInterval(gameLoop, 60);
 });
 
+//resets the page
 function reload() {
     window.location.reload();
 }
-// make event listener for play again btn and keep catching btn
+// event listener for play again btn and keep catching btn
 replayBtn.forEach(button => {
     button.addEventListener('click', reload);
 });
 
 
-// replayBtn.addEventListener('click', reload);
+//event listener for game controls
 document.addEventListener('keydown', movementHandler);
-
-
-
-// display "game over" in new window with "Play again" btn
