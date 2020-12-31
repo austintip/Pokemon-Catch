@@ -3,6 +3,21 @@ document.addEventListener('DOMContentLoaded', (e => {
     console.log("hello!")
 }));
 
+let gameTheme = document.createElement('audio')
+gameTheme.src = './sounds/Gametheme.mp3'
+gameTheme.volume = .5
+
+let catchSound = document.createElement('audio')
+catchSound.src = './sounds/catchSound.mp3'
+catchSound.volume = .5
+
+let battleSound = document.createElement('audio')
+battleSound.src = './sounds/battleSound.mp3'
+battleSound.volume = .5
+
+let throwBallSound = document.createElement('audio')
+throwBallSound.src = './sounds/pokeballThrow.mp3'
+throwBallSound.volume = .5
 
 let game = document.getElementById('game');
 // Have a box that displays instructions
@@ -72,15 +87,24 @@ let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
     trainer.render()
     rocketGrunt.render()
+    if (rocketGrunt.alive == false) {
+        battleSound.play();
+    }
     rocketMovement();
     pokemonMovement();
     pokeball.render(); 
+    gameTheme.play();
     detectHit();
     if (pokemon.alive == true){
-    pokemon.render();
+        pokemon.render();
+    }
+    if (pokemon.alive == false){
+        catchSound.play();
+        gameTheme.pause();
     }
     if (pokeball.alive == false) {
         throwPokeball();
+        throwBallSound.play();
     }
 }
 
@@ -94,6 +118,7 @@ let endGame = () => {
         clearInterval(gameInterval)
     }, 100)
     gameOverBox.style.display = "block";
+    gameTheme.pause();
 }
 
 let endGameWin = () => {
@@ -101,6 +126,7 @@ let endGameWin = () => {
         clearInterval(gameInterval)
     }, 100)
     youWinBox.style.display = "block";
+    gameTheme.pause();
 }
 
 //functions that detect hits of the pokeball
@@ -111,6 +137,7 @@ let detectHit = () => {
         pokeball.x <= rocketGrunt.x + rocketGrunt.width &&
         pokeball.y <= rocketGrunt.y + rocketGrunt.height &&
         pokeball.y + pokeball.height >= rocketGrunt.y) {
+            rocketGrunt.alive = false;
             endGame();
         } else if(
         pokeball.x + pokeball.width >= pokemon.x &&
