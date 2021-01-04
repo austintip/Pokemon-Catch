@@ -26,6 +26,7 @@ let startButton = document.getElementById('startButton');
 let gameOverBox = document.getElementById('gameOver');
 let youWinBox = document.getElementById('youWin');
 let replayBtn = document.querySelectorAll('.replayButton');
+let pokemonVert = 1
 
 let ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height'])
@@ -79,13 +80,18 @@ function pokemonMovement() {
     if (pokemon.x >= game.width) {
         pokemon.x = 0-pokemon.width
     }
-    if (pokemon.y >= game.height && pokemon.y < 10) {
-    pokemon.y = pokemon.y+5
-    }; 
-    if pokemon.y = 10 {
-        pokemon.y = pokemon.y-5
-    };
+    console.log(pokemon.y)
     pokemon.x += pokemon.speed
+    if (pokemon.y == 20) {
+        pokemonVert = -1
+    } 
+    if (pokemon.y == 0) {
+        pokemonVert = 1
+    }
+// if y > 20, y decreases 
+// if y < 1, y increases
+    pokemon.y += pokemonVert
+
 }
 
 //the game!!
