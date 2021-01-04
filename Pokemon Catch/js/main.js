@@ -1,6 +1,5 @@
-console.log("hello")
+
 document.addEventListener('DOMContentLoaded', (e => {
-    console.log("hello!")
 }));
 
 let gameTheme = document.createElement('audio')
@@ -80,7 +79,6 @@ function pokemonMovement() {
     if (pokemon.x >= game.width) {
         pokemon.x = 0-pokemon.width
     }
-    console.log(pokemon.y)
     pokemon.x += pokemon.speed
     if (pokemon.y == 20) {
         pokemonVert = -1
@@ -143,7 +141,6 @@ let endGameWin = () => {
 
 //functions that detect hits of the pokeball
 let detectHit = () => {
-    console.log('yo')
     if (
         pokeball.x + pokeball.width >= rocketGrunt.x &&
         pokeball.x <= rocketGrunt.x + rocketGrunt.width &&
@@ -176,7 +173,6 @@ const throwPokeball = () => {
 
 //moves trainer
 let movementHandler = (e) => {
-    console.log(e.key)
     if (e.key ==="ArrowRight") {
         trainer.x += trainer.speed
         if (pokeball.alive) {
