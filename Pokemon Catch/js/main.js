@@ -194,10 +194,26 @@ startButton.addEventListener('click', (e) => {
 function reload() {
     window.location.reload();
 }
+
+// function replay() {
+//     youWinBox.style.display = "none";
+//     gameOverBox.style.display = "none";
+//     gameInterval.setInterval(gameLoop, 60);
+//     pokemon.alive = true;
+// };
+
+
 // event listener for play again btn and keep catching btn
 replayBtn.forEach(button => {
     button.addEventListener('click', reload);
 });
+
+
+// replayBtn.forEach(button => {
+//     button.addEventListener('click', (event) =>
+//     event.preventDefault);
+//     replay();
+// });
 
 
 //event listener for game controls
