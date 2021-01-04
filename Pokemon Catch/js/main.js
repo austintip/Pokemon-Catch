@@ -58,7 +58,7 @@ function sprite(x, y, width, height, color, speed, alive, type)  {
 
 let trainer = new sprite (20, 390, 50, 50, "./images/pokemonTrainer.png", 10, true, "image")
 let rocketGrunt = new sprite (15, 160, 55, 55, "./images/rocketGruntImage.png", 5, true, "image")
-let pokemon = new sprite (10, 40, 45, 45, "./images/pikachuImage.png", 7, true, "image")
+let pokemon = new sprite (10, 0, 45, 45, "./images/pikachuImage.png", 7, true, "image")
 let pokeball = new sprite(20, 385, 20, 20, "./images/pokeballImage.png", 10, true, "image")
 
 
@@ -79,6 +79,12 @@ function pokemonMovement() {
     if (pokemon.x >= game.width) {
         pokemon.x = 0-pokemon.width
     }
+    if (pokemon.y >= game.height && pokemon.y < 10) {
+    pokemon.y = pokemon.y+5
+    }; 
+    if pokemon.y = 10 {
+        pokemon.y = pokemon.y-5
+    };
     pokemon.x += pokemon.speed
 }
 
