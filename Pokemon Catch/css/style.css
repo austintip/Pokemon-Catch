@@ -74,7 +74,30 @@ h1 {
 
 #modal-content-two {
     text-align: center;
-    background-color: rgb(123, 216, 177);
+    background-color: rgb(243, 232, 71);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 40%;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#eeveeWin {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: lightblue;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal-content-three {
+    text-align: center;
+    background-color: rgb(206, 158, 86);
     margin: 15% auto;
     padding: 20px;
     border: 1px solid black;

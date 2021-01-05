@@ -24,6 +24,7 @@ let game = document.getElementById('game');
 let startButton = document.getElementById('startButton');
 let gameOverBox = document.getElementById('gameOver');
 let youWinBox = document.getElementById('youWin');
+let eeveeWinBox = document.getElementById('eeveeWin');
 let replayBtn = document.querySelectorAll('.replayButton');
 let pokemonVert = 1
 
@@ -57,8 +58,9 @@ function sprite(x, y, width, height, color, speed, alive, type)  {
 
 
 let trainer = new sprite (20, 390, 50, 50, "./images/pokemonTrainer.png", 10, true, "image")
-let rocketGrunt = new sprite (15, 160, 55, 55, "./images/rocketGruntImage.png", 5, true, "image")
-let pokemon = new sprite (10, 0, 45, 45, "./images/pikachuImage.png", 7, true, "image")
+let rocketGrunt = new sprite (15, 200, 55, 55, "./images/rocketGruntImage.png", 6.7, true, "image")
+let pokemon = new sprite (10, 0, 45, 45, "./images/pikachuImage.png", 11, true, "image")
+let pokemonTwo = new sprite (100, 60, 45, 45, "./images/eeveeImage.png", 7, true, "image")
 let pokeball = new sprite(20, 385, 20, 20, "./images/pokeballImage.png", 10, true, "image")
 
 
@@ -92,6 +94,20 @@ function pokemonMovement() {
 
 }
 
+function pokemonTwoMovement() {
+    if (pokemonTwo.x >= game.width) {
+        pokemonTwo.x = 0-pokemonTwo.width
+    }
+    pokemonTwo.x += pokemonTwo.speed
+    if (pokemonTwo.y == 75) {
+        pokemonVert = -1
+    }
+    if (pokemonTwo.y == 60) {
+        pokemonVert = 1
+    }
+    pokemonTwo.y += pokemonVert
+}
+
 //the game!!
 let gameLoop = () => {
     ctx.clearRect(0, 0, game.width, game.height)
@@ -102,13 +118,17 @@ let gameLoop = () => {
     }
     rocketMovement();
     pokemonMovement();
+    pokemonTwoMovement();
     pokeball.render(); 
     gameTheme.play();
     detectHit();
     if (pokemon.alive == true){
         pokemon.render();
     }
-    if (pokemon.alive == false){
+    if (pokemonTwo.alive == true){
+        pokemonTwo.render();
+    }
+    if (pokemon.alive == false || pokemonTwo.alive == false){
         catchSound.play();
         gameTheme.pause();
     }
@@ -139,6 +159,14 @@ let endGameWin = () => {
     gameTheme.pause();
 }
 
+let endGameEeveeWin = () => {
+    setTimeout(() => {
+        clearInterval(gameInterval)
+    }, 100)
+    eeveeWinBox.style.display = "block";
+    gameTheme.pause();
+}
+
 //functions that detect hits of the pokeball
 let detectHit = () => {
     if (
@@ -148,17 +176,27 @@ let detectHit = () => {
         pokeball.y + pokeball.height >= rocketGrunt.y) {
             rocketGrunt.alive = false;
             endGame();
-        } else if(
+    } 
+    if(
         pokeball.x + pokeball.width >= pokemon.x &&
         pokeball.x <= pokemon.x + pokemon.width &&
-        pokeball.y <= pokemon.y +pokemon.height &&
+        pokeball.y <= pokemon.y + pokemon.height &&
         pokeball.y + pokeball.height >= pokemon.y) {
             pokemon.alive = false;
             pokeball.y = trainer.y
             pokeball.alive = true;
             endGameWin();
             //TODO function that makes pokemon disappear and respawn
-        }
+    } else if(
+            pokeball.x + pokeball.width >= pokemonTwo.x &&
+            pokeball.x <= pokemonTwo.x + pokemonTwo.width &&
+            pokeball.y <= pokemonTwo.y + pokemonTwo.height &&
+            pokeball.y + pokeball.height >= pokemonTwo.y) {
+                pokemonTwo.alive = false;
+                pokeball.y = trainer.y
+                pokeball.alive= true;
+                endGameEeveeWin();
+            }
     }
 
 
@@ -184,7 +222,7 @@ let movementHandler = (e) => {
             pokeball.x = trainer.x
         }
     } else if (e.key ==='w') {
-            pokeball.x = trainer.x
+            // pokeball.x = trainer.x
             pokeball.alive = false
     } else {
         console.log('Use right or left arrow keys to move!')
