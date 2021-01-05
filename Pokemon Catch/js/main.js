@@ -59,9 +59,9 @@ function sprite(x, y, width, height, color, speed, alive, type)  {
 
 let trainer = new sprite (20, 390, 50, 50, "./images/pokemonTrainer.png", 10, true, "image")
 let rocketGrunt = new sprite (15, 200, 55, 55, "./images/rocketGruntImage.png", 6.7, true, "image")
-let pokemon = new sprite (10, 0, 45, 45, "./images/pikachuImage.png", 11, true, "image")
-let pokemonTwo = new sprite (100, 60, 45, 45, "./images/eeveeImage.png", 7, true, "image")
-let pokeball = new sprite(20, 385, 20, 20, "./images/pokeballImage.png", 10, true, "image")
+let pokemon = new sprite (10, 0, 45, 45, "./images/pikachuImage.png", 10.2, true, "image")
+let pokemonTwo = new sprite (100, 60, 45, 45, "./images/eeveeImage.png", 7.3, true, "image")
+let pokeball = new sprite(20, 385, 20, 20, "./images/pokeballImage.png", 13, true, "image")
 
 
 
