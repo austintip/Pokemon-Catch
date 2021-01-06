@@ -245,8 +245,13 @@ function reload() {
 //     youWinBox.style.display = "none";
 //     gameOverBox.style.display = "none";
 //     gameInterval.setInterval(gameLoop, 60);
-//     pokemon.alive = true;
+//     if (pokemon.alive = false){
+//     pokemon.alive = true
 // };
+// if (pokemonTwo.alive = false) {
+//     pokemonTwo.alive = true
+// }
+// }; 
 
 
 // event listener for play again btn and keep catching btn
